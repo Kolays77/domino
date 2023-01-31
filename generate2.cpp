@@ -1,4 +1,4 @@
-#include "domino.h"
+#include "domino2.h"
 #include "timer.h"
 
 // compile:
