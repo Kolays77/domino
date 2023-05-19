@@ -1,3 +1,4 @@
+```
 Start number domino : 20
 Max Depth :21
 Num of States (threads): 35
@@ -22,4 +23,4 @@ Time : 406657ms
 21 : 189803393280
 =====================================
 ./a.out 21 3  4456.61s user 0.81s system 1096% cpu 6:46.66 total
-
+```
