@@ -99,6 +99,22 @@ struct GlobalState {
 
 };
 
+
+size_t find_first(const std::bitset<N>& bitset) {
+    for (size_t i = 0; i < N; ++i) {
+	if (bitset[i]) return i;
+    }
+    return N;
+}
+
+
+size_t find_next(const std::bitset<N>& bitset, size_t start_pos) {
+   for (size_t i = start_pos+1; i < N; ++i) {
+   	if (bitset[i]) return i;
+   } return N;
+
+}
+
 void rec_run_and_count(GlobalState& st, const int max_level) {
     st.count(st.curr_pos);
     if (st.curr_pos == max_level) return;
@@ -109,7 +125,7 @@ void rec_run_and_count(GlobalState& st, const int max_level) {
     // [1, 0, 0, 1, ... ] = MAP & ~bank : curr_pos nodes
 
     auto next_moves = ~st.bank & MAP_VALUE_NUMBER[st.back()];
-    for (size_t pos = next_moves._Find_first(); pos < 28; pos = next_moves._Find_next(pos)) {
+    for (size_t pos = find_first(next_moves); pos < 28; pos = find_next(next_moves, pos)) {
         st.add(pos);
         rec_run_and_count(st, max_level);
         st.pop();
@@ -132,13 +148,10 @@ void rec_run_and_save(GlobalState& st,
     // [1, 0, 0, 1, ... ] = MAP & ~bank : curr_pos nodes
 
     auto next_moves = ~st.bank & MAP_VALUE_NUMBER[st.back()];
-    size_t pos = next_moves._Find_first();
-
-    while (pos - 28 != 0)  {
+    for (size_t pos = find_first(next_moves); pos < 28; pos = find_next(next_moves, pos)) {
         st.add(pos);
-            rec_run_and_save(st, states_holder,  max_level, level+1);
+        rec_run_and_save(st, states_holder,  max_level, level+1); 
         st.pop();
-        pos = next_moves._Find_next(pos);
     }
 }
 

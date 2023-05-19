@@ -1,5 +1,5 @@
 #include "domino.h"
-#include "timer.h"
+#include "test/timer.h"
 
 // compile:
 // g++ generate2.cpp -Ofast -std=c++20  -funroll-loops
